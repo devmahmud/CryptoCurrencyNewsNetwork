@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome To Crypto News Network</h1>
+        <p class="lead">Your source For Up To The Minute Cryptocurrency and Blockchain News!</p>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">24h High</th>
+                <th scope="col">24h Low</th>
+                <th scope="col">Market Cap</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key,value in prices.items %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ key }}</td>
+                <td>{{ value.USD.PRICE }}</td>
+                <td>{{ value.USD.HIGHDAY }}</td>
+                <td>{{ value.USD.LOWDAY }}</td>
+                <td>{{ value.USD.MKTCAP }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+</div>
+
+<div class="container">
+    <div class="row mt-5">
+        {% for news in newses %}
+        <div class="col-sm">
+            <div class="card mx-auto mt-3" style="width: 18rem;">
+                <img class="card-img-top" src="{{ news.imageurl }}" alt="{{ news.source }}" style="max-height:200px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ news.title }}</h5>
+                    <p class="card-text">{{ news.body|truncatechars:'120' }}</p>
+                    <a href="{{ news.url }}" class="btn btn-secondary">Read More...</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+
+    {% if notfound %}
+    <div class="jumbotron">
+        <h1 class="display-4">Enter a item in the form to search</h1>
+    </div>
+    {% else %}
+
+    {% if prices.Response %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        Sorry, {{ quote }} Doesnot Exists. Please Try Again
+    </div>
+    {% endif %}
+
+    {% for key,value in prices.DISPLAY.items %}
+    <div class="jumbotron">
+        <h1 class="display-4">{{ quote }}</h1>
+        <strong>Name</strong>: {{ key }} <br>
+        <strong>Price</strong>: {{ value.USD.PRICE }}<br>
+        <strong>24h High</strong>: {{ value.USD.HIGHDAY }} <br>
+        <strong>24h Low</strong>: {{ value.USD.LOWDAY }} <br>
+        <strong>Market Cap</strong>: {{ value.USD.MKTCAP }} <br>
+    </div>
+    {% endfor %}
+
+    {% endif %}
+
+</div>
+{% endblock content %}
